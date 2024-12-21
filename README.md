@@ -22,12 +22,12 @@ package main
 
 import (
     "log"
-    "github.com/mochams/erlgo/port"
+    "github.com/mochams/erlgo"
 )
 
 func main() {
     // Read a message from Erlang
-    messageBytes, err := port.ReadFromErlang()
+    messageBytes, err := erlgo.ReadFromErlang()
     if err != nil {
         log.Fatal(err)
     }
@@ -36,7 +36,7 @@ func main() {
     
     // Write a response back to Erlang
     response := []byte("your response data")
-    if err := port.WriteToErlang(response); err != nil {
+    if err := erlgo.WriteToErlang(response); err != nil {
         log.Fatal(err)
     }
 }
