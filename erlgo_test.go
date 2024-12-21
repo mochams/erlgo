@@ -22,7 +22,7 @@ type mockStdout struct {
 
 func (m *mockStdout) Sync() error { return nil }
 
-func TestReadFromErlang(t *testing.T) {
+func TestReceive(t *testing.T) {
 	tests := []struct {
 		name    string
 		input   []byte
@@ -67,7 +67,7 @@ func TestReadFromErlang(t *testing.T) {
 			w.Close()
 
 			// Run test
-			got, err := ReadFromErlang()
+			got, err := Receive()
 
 			// Restore stdin
 			os.Stdin = oldStdin
@@ -84,7 +84,7 @@ func TestReadFromErlang(t *testing.T) {
 	}
 }
 
-func TestWriteToErlang(t *testing.T) {
+func TestSend(t *testing.T) {
 	tests := []struct {
 		name    string
 		input   []byte
@@ -115,7 +115,7 @@ func TestWriteToErlang(t *testing.T) {
 			os.Stdout = w
 
 			// Run test
-			err := WriteToErlang(tt.input)
+			err := Send(tt.input)
 
 			// Close write end and read result
 			w.Close()
