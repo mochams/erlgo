@@ -1,0 +1,44 @@
+name: Go Tests
+
+on:
+  push:
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go-version: ["1.23.x"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Install dependencies
+        run: go mod tidy
+
+      - name: Run tests
+        run: go test -v ./...
+
+      - name: Run tests with race detector
+        run: go test -race -v ./...
+
+      - name: Check formatting
+        run: |
+          if [ -n "$(go fmt ./...)" ]; then
+            echo "Code is not formatted properly"
+            exit 1
+          fi
+
+      - name: Run vet
+        run: go vet ./...
+
+    #   - name: Run staticcheck
+    #     uses: dominikh/staticcheck-action@v1.3.0
+    #     with:
+    #       version: "2024.1"
