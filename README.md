@@ -12,7 +12,7 @@ A lightweight Go library that implements the Erlang port protocol for communicat
 ## Installation
 
 ```bash
-go get github.com/mochams/erlgo
+go get github.com/mochams/erlgo@latest
 ```
 
 ## Usage
@@ -22,12 +22,12 @@ package main
 
 import (
     "log"
-    "github.com/mochams/erlgo"
+    "github.com/mochams/erlgo/port"
 )
 
 func main() {
     // Read a message from Erlang
-    messageBytes, err := erlgo.ReadFromErlang()
+    messageBytes, err := port.ReadFromErlang()
     if err != nil {
         log.Fatal(err)
     }
@@ -36,7 +36,7 @@ func main() {
     
     // Write a response back to Erlang
     response := []byte("your response data")
-    if err := erlgo.WriteToErlang(response); err != nil {
+    if err := port.WriteToErlang(response); err != nil {
         log.Fatal(err)
     }
 }
