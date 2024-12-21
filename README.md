@@ -27,7 +27,7 @@ import (
 
 func main() {
     // Read a message from Erlang
-    messageBytes, err := erlgo.ReadFromErlang()
+    messageBytes, err := erlgo.Receive()
     if err != nil {
         log.Fatal(err)
     }
@@ -36,7 +36,7 @@ func main() {
     
     // Write a response back to Erlang
     response := []byte("your response data")
-    if err := erlgo.WriteToErlang(response); err != nil {
+    if err := erlgo.Send(response); err != nil {
         log.Fatal(err)
     }
 }
@@ -44,18 +44,18 @@ func main() {
 
 ## API
 
-### ReadFromErlang
+### Receive
 
 ```go
-func ReadFromErlang() ([]byte, error)
+func Receive() ([]byte, error)
 ```
 
 Reads a length-prefixed message from Erlang through stdin. Returns the message bytes and any error encountered.
 
-### WriteToErlang
+### Send
 
 ```go
-func WriteToErlang(messageBytes []byte) error
+func Send(messageBytes []byte) error
 ```
 
 Writes a length-prefixed message to Erlang through stdout. Takes the message bytes and returns any error encountered.

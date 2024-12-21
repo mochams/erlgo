@@ -12,7 +12,7 @@ import (
 	"os"
 )
 
-// ReadFromErlang reads a message from Erlang via stdin.
+// Receive reads a message from Erlang via stdin.
 // The message follows the Erlang port protocol format:
 // - 4-byte length prefix in big-endian order
 // - followed by the actual message content
@@ -25,12 +25,12 @@ import (
 //
 // Example:
 //
-//	messageBytes, err := erlgo.ReadFromErlang()
+//	messageBytes, err := erlgo.Receive()
 //	if err != nil {
 //	    log.Fatal(err)
 //	}
 //	// Process messageBytes...
-func ReadFromErlang() ([]byte, error) {
+func Receive() ([]byte, error) {
 	// Create a new buffered reader from stdin
 	reader := bufio.NewReader(os.Stdin)
 
@@ -54,7 +54,7 @@ func ReadFromErlang() ([]byte, error) {
 	return messageBytes, nil
 }
 
-// WriteToErlang writes a message to Erlang via stdout following the port protocol.
+// Send writes a message to Erlang via stdout following the port protocol.
 // The message is automatically prefixed with its length as a 4-byte integer
 // in big-endian order.
 //
@@ -68,11 +68,11 @@ func ReadFromErlang() ([]byte, error) {
 // Example:
 //
 //	message := []byte("hello")
-//	err := erlgo.WriteToErlang(message)
+//	err := erlgo.Send(message)
 //	if err != nil {
 //	    log.Fatal(err)
 //	}
-func WriteToErlang(messageBytes []byte) error {
+func Send(messageBytes []byte) error {
 	// Create length bytes in big-endian order
 	lengthBytes := make([]byte, 4)
 	binary.BigEndian.PutUint32(lengthBytes, uint32(len(messageBytes)))
