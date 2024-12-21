@@ -1,5 +1,5 @@
 module example.com/hello_world
 
-go 1.23.4
+go 1.23
 
-require github.com/mochams/erlgo v0.4.0 // indirect
+require github.com/mochams/erlgo v0.5.0
