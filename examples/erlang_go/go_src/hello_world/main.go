@@ -13,7 +13,7 @@ type Message struct {
 }
 
 func main() {
-	messageBytes, err := erlgo.ReadFromErlang()
+	messageBytes, err := erlgo.Receive()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -38,7 +38,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	err = erlgo.WriteToErlang(jsonBytes)
+	err = erlgo.Send(jsonBytes)
 	if err != nil {
 		log.Fatal(err)
 	}
