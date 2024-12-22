@@ -13,6 +13,10 @@ An OTP library that communicates to go via ports.
 ### Build Go
 
 ```bash
+go work init
+
+go work use go_src/hello_world
+
 make build
 ```
 
