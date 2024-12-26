@@ -1,6 +1,8 @@
-# erlgo
+# erlgo 🚀
 
 A lightweight Go library that implements the Erlang port protocol for communication between Go and Erlang/OTP applications.
+
+[![License](https://img.shields.io/github/license/mochams/erlgo)](https://github.com/mochams/erlgo)
 
 ## Features
 
